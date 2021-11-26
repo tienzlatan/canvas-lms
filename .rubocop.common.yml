@@ -81,7 +81,7 @@ Migration/Tagged:
 
 Naming/FileName:
   Exclude:
-    - "**/Gemfile.d/~after.rb"
+    - '**/Gemfile.d/~after.rb'
 
 Rails/ApplicationRecord:
   Enabled: false # we never bothered creating an ApplicationRecord
@@ -92,8 +92,8 @@ Rails/SkipsModelValidations:
 Rails/ContentTag:
   Severity: error
   Exclude:
-    - "**/db/migrate/*" # this cop is for views, not migrations, where it gets confused with outrigger
-    - "doc/**/*"
+    - '**/db/migrate/*' # this cop is for views, not migrations, where it gets confused with outrigger
+    - 'doc/**/*'
 
 RSpec/AnyInstance:
   Enabled: false # while using an instance double would be preferable, it's a pain
@@ -135,7 +135,7 @@ Style/Documentation:
 Style/Encoding:
   Severity: error
 Style/FrozenStringLiteralComment:
-  Severity: error
+  Enabled: false
 Style/IfUnlessModifier:
   # see also https://github.com/rubocop/rubocop/discussions/10048
   Enabled: false # can obscure important decisions or put too much code in a line
@@ -174,7 +174,7 @@ Naming/VariableNumber: # TODO
 Rails/DynamicFindBy: # TODO; autocorrect (unsafe)
   AllowedMethods:
     - find_by_name # PluginSetting.find_by_name
-  AutoCorrect: false  
+  AutoCorrect: false
 Rails/ReadWriteAttribute: # TODO: autocorrect (unsafe)
   Enabled: false # accessors are often defined in terms of read_attribute
 Rails/TimeZone: # TODO: autocorrect (unsafe)

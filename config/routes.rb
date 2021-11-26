@@ -25,6 +25,8 @@ Dir["{gems,vendor}/plugins/*/config/pre_routes.rb"].each { |pre_routes|
 }
 
 CanvasRails::Application.routes.draw do
+  resources :articles
+
   post "/api/graphql", to: "graphql#execute"
   post "/api/graphql/subgraph", to: "graphql#subgraph_execute"
   # The subgraph endpoint is for use only with the federated API Gateway. See
