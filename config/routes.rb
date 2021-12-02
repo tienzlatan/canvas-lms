@@ -25,8 +25,6 @@ Dir["{gems,vendor}/plugins/*/config/pre_routes.rb"].each { |pre_routes|
 }
 
 CanvasRails::Application.routes.draw do
-  resources :articles
-
   post "/api/graphql", to: "graphql#execute"
   post "/api/graphql/subgraph", to: "graphql#subgraph_execute"
   # The subgraph endpoint is for use only with the federated API Gateway. See
@@ -2572,5 +2570,9 @@ CanvasRails::Application.routes.draw do
     scope(controller: :disable_post_to_sis_api) do
       put 'courses/:course_id/disable_post_to_sis', action: 'disable_post_to_sis', as: :disable_post_to_sis_course_assignments
     end
+  end
+
+  resources :accounts do
+    resources :articles
   end
 end

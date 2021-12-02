@@ -1312,7 +1312,7 @@ class Account < ActiveRecord::Base
     end
 
     given { |user| !self.cached_account_users_for(user).empty? }
-    can :read and can :read_as_admin and can :manage and can :update and can :delete and can :read_outcomes and can :read_terms
+    can :read and can :read_as_admin and can :manage and can :update and can :delete and can :read_outcomes and can :read_terms and can :read_articles
 
     given { |user| self.root_account? && self.cached_all_account_users_for(user).any? }
     can :read_terms
@@ -1733,6 +1733,8 @@ class Account < ActiveRecord::Base
   TAB_SEARCH = 18
   TAB_BRAND_CONFIGS = 19
   TAB_EPORTFOLIO_MODERATION = 20
+  # ======================================
+  TAB_ARTICLES = 21
 
   # site admin tabs
   TAB_PLUGINS = 14
@@ -1779,6 +1781,8 @@ class Account < ActiveRecord::Base
         tabs << { id: TAB_SIS_IMPORT, label: t('#account.tab_sis_import', "SIS Import"),
                   css_class: 'sis_import', href: :account_sis_import_path }
       end
+      # ================================
+      tabs << { :id => TAB_ARTICLES, :label => "Articles", :css_class => 'articles', :href => :account_articles_path } if self.grants_right?(user, :read_articles)
     end
 
     tabs << { :id => TAB_BRAND_CONFIGS, :label => t('#account.tab_brand_configs', "Themes"), :css_class => 'brand_configs', :href => :account_brand_configs_path } if manage_settings && branding_allowed?

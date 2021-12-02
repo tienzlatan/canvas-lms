@@ -1,11 +1,11 @@
 <h1><%= @article.title %></h1>
 <p><%= @article.body %></p>
 
-<button><%= link_to "Edit", edit_article_path %></button>
+<button><%= link_to "Edit", edit_account_article_path %></button>
 <button>
-  <%= link_to "Destroy", article_path(@article),
+  <%= link_to "Destroy", account_article_path(@article),
       method: :delete,
       data: { confirm: "Delete this article?" } 
   %>
 </button>
-<button><%= link_to "All articles", articles_path %></button>
+<button><%= link_to "All articles", account_articles_path %></button>

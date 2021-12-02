@@ -1,13 +1,21 @@
+<% add_crumb t(:articles_crumb, "Articles") %>
+
 <h1>All Articles:</h1>
+
+<%= form_with url: "/accounts/#{@current_user.id}/articles", method: :get do |form| %>
+  <%= form.label :article_title, "Search for:" %>
+  <%= form.text_field :article_title, value: @search_text %>
+  <%= form.submit "Search" %>
+<% end %>
 
 <ul>
   <% @articles.each do |a| %>
     <li>
-      <%= link_to a.title, a %>
+      <%= link_to a.title, account_article_path(@account.id, a.id) %>
     </li>
   <% end %>
 </ul>
 
 <button>
-  <%= link_to "Create new article", new_article_path%>
+  <%= link_to "Create new article", new_account_article_path%>
 </button>
