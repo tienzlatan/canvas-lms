@@ -295,7 +295,7 @@ export default class PermissionsTable extends Component {
 
   render() {
     return (
-      <div className="ic-permissions__table-container" ref={c => (this.contentWrapper = c)}>
+      <div className="ic-permissions__table-container1" ref={c => (this.contentWrapper = c)}>
         {this.renderTable()}
       </div>
     )

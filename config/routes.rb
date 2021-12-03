@@ -217,6 +217,8 @@ CanvasRails::Application.routes.draw do
 
     get "settings#{full_path_glob}", action: :settings
     get :settings
+    # ===========================
+    get :test
     get 'details' => 'courses#settings'
     post :re_send_invitations
     post :enroll_users
@@ -2572,6 +2574,7 @@ CanvasRails::Application.routes.draw do
     end
   end
 
+  # ============================
   resources :accounts do
     resources :articles
   end

@@ -2922,6 +2922,8 @@ class Course < ActiveRecord::Base
   TAB_RUBRICS = 18
   TAB_SCHEDULE = 19
   TAB_PACE_PLANS = 20
+  # ====================================
+  TAB_TEST = 21
 
   CANVAS_K6_TAB_IDS = [TAB_HOME, TAB_ANNOUNCEMENTS, TAB_GRADES, TAB_MODULES].freeze
   COURSE_SUBJECT_TAB_IDS = [TAB_HOME, TAB_SCHEDULE, TAB_MODULES, TAB_GRADES, TAB_GROUPS].freeze
@@ -3017,6 +3019,11 @@ class Course < ActiveRecord::Base
       :label => t('#tabs.settings', "Settings"),
       :css_class => 'settings',
       :href => :course_settings_path,
+    }, {
+      :id => TAB_TEST, # ============================
+      :label => t('#tabs.test', "Test"),
+      :css_class => 'test',
+      :href => :course_test_path,
     }]
   end
 
