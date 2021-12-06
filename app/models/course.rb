@@ -3248,6 +3248,7 @@ class Course < ActiveRecord::Base
         delete_unless.call([TAB_ANNOUNCEMENTS], :read_announcements)
         delete_unless.call([TAB_RUBRICS], :read_rubrics, :manage_rubrics)
         delete_unless.call([TAB_FILES], :read, *RoleOverride::GRANULAR_FILE_PERMISSIONS)
+        delete_unless.call([TAB_TEST], :view_test)
 
         if item_banks_tab &&
            !check_for_permission.call(:manage_content, *RoleOverride::GRANULAR_MANAGE_ASSIGNMENT_PERMISSIONS)

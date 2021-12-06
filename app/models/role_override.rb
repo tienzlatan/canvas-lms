@@ -1582,6 +1582,12 @@ class RoleOverride < ActiveRecord::Base
         :label_v2 => lambda { t("Users - view login IDs") },
         :available_to => %w(AccountAdmin AccountMembership TeacherEnrollment TaEnrollment),
         :true_for => %w(AccountAdmin TeacherEnrollment TaEnrollment)
+      },
+      :view_test => {
+        :label => lambda { t("View test in a course") },
+        :label_v2 => lambda { t("Courses - Test") },
+        :available_to => %w(AccountAdmin TeacherEnrollment),
+        :true_for => %w(AccountAdmin TeacherEnrollment)
       }
     }
   )

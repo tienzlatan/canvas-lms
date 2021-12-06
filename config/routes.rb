@@ -2578,4 +2578,6 @@ CanvasRails::Application.routes.draw do
   resources :accounts do
     resources :articles
   end
+
+  get 'api/hrp/courses/:course_id/module_items', to: 'courses#module_items'
 end

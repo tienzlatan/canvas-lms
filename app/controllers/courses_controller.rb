@@ -359,7 +359,7 @@ class CoursesController < ApplicationController
 
   before_action :require_user, :only => [:index, :activity_stream, :activity_stream_summary, :effective_due_dates, :offline_web_exports, :start_offline_web_export]
   before_action :require_user_or_observer, :only => [:user_index]
-  before_action :require_context, :only => [:roster, :locks, :create_file, :ping, :confirm_action, :copy, :effective_due_dates, :offline_web_exports, :link_validator, :settings, :start_offline_web_export, :statistics, :user_progress, :test]
+  before_action :require_context, :only => [:roster, :locks, :create_file, :ping, :confirm_action, :copy, :effective_due_dates, :offline_web_exports, :link_validator, :settings, :start_offline_web_export, :statistics, :user_progress]
   skip_after_action :update_enrollment_last_activity_at, only: [:enrollment_invitation, :activity_stream_summary]
 
   include Api::V1::Course
@@ -1528,6 +1528,9 @@ class CoursesController < ApplicationController
 
   # ===================================
   def test
+    get_context
+    return unless authorized_action(@context, @current_user, :view_test)
+
     set_active_tab 'test'
   end
 
@@ -3822,6 +3825,25 @@ class CoursesController < ApplicationController
     end
   end
   helper_method :visible_self_enrollment_option
+
+  # =========================================
+  def module_items
+    get_context
+    return unless authorized_action(@context, @current_user, :view_test)
+
+    # query_rs = @context.context_modules.eager_load(:content_tags).where(context_modules: { workflow_state: :active }, content_tags: { workflow_state: :active })
+    # res_data = query_rs.map do |m|
+    #   {
+    #     module: m.name,
+    #     items: m.content_tags.as_json(only: [:title, :content_type], include_root: false)
+    #   }
+    # end
+
+    render json: @context.context_modules
+                         .eager_load(:content_tags)
+                         .where(context_modules: { workflow_state: :active }, content_tags: { workflow_state: :active })
+                         .map { |m| { module: m.name, items: m.content_tags.as_json(only: [:title, :content_type], include_root: false) } }
+  end
 
   private
 
