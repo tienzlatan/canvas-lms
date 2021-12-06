@@ -16,7 +16,7 @@
  * with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-import I18n from 'i18n!permissions'
+import I18n from 'i18n!tien_test'
 
 const tienTestEle = document.getElementById('tien_test')
 tienTestEle.innerHTML = I18n.t('tien_test')
