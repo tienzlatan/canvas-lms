@@ -16,13 +16,28 @@
  * with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-import createTienTestIndex from './react/index'
-import ready from '@instructure/ready'
+import React from 'react'
+import ReactDOM from 'react-dom'
+import {Provider} from 'react-redux'
 
-ready(() => {
-  const root = document.querySelector('#content')
+import TestTable from './components/testTable'
 
-  const app = createTienTestIndex(root)
+export default function createTienTestIndex(root) {
+  function unmount() {
+    ReactDOM.unmountComponentAtNode(root)
+  }
 
-  app.render()
-})
+  function render() {
+    ReactDOM.render(
+      <Provider>
+        <TestTable />
+      </Provider>,
+      root
+    )
+  }
+
+  // For some reason this is not working  TODO figure this out
+  // subscribeFlashNotifications(store)
+
+  return {unmount, render}
+}
